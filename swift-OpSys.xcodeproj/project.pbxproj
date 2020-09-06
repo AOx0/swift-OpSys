@@ -8,7 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		A997799B2502CFA800B82E34 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A997799A2502CFA800B82E34 /* main.swift */; };
+<<<<<<< HEAD
 		A99779A225043A0100B82E34 /* Octal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99779A125043A0100B82E34 /* Octal.swift */; };
+=======
+		A99779A225043A0100B82E34 /* octal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99779A125043A0100B82E34 /* octal.swift */; };
+		A99779A42504666A00B82E34 /* hexa.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99779A32504666A00B82E34 /* hexa.swift */; };
+		A99779A62504CCD100B82E34 /* binario.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99779A52504CCD100B82E34 /* binario.swift */; };
+>>>>>>> 41a2bdc... Structure changes
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,7 +32,13 @@
 /* Begin PBXFileReference section */
 		A99779972502CFA800B82E34 /* swift-OpSys */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "swift-OpSys"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A997799A2502CFA800B82E34 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+<<<<<<< HEAD
 		A99779A125043A0100B82E34 /* Octal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Octal.swift; sourceTree = "<group>"; };
+=======
+		A99779A125043A0100B82E34 /* octal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = octal.swift; sourceTree = "<group>"; };
+		A99779A32504666A00B82E34 /* hexa.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hexa.swift; sourceTree = "<group>"; };
+		A99779A52504CCD100B82E34 /* binario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = binario.swift; sourceTree = "<group>"; };
+>>>>>>> 41a2bdc... Structure changes
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,7 +72,13 @@
 			isa = PBXGroup;
 			children = (
 				A997799A2502CFA800B82E34 /* main.swift */,
+<<<<<<< HEAD
 				A99779A125043A0100B82E34 /* Octal.swift */,
+=======
+				A99779A52504CCD100B82E34 /* binario.swift */,
+				A99779A125043A0100B82E34 /* octal.swift */,
+				A99779A32504666A00B82E34 /* hexa.swift */,
+>>>>>>> 41a2bdc... Structure changes
 			);
 			path = "swift-OpSys";
 			sourceTree = "<group>";
@@ -122,8 +140,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A99779A62504CCD100B82E34 /* binario.swift in Sources */,
 				A997799B2502CFA800B82E34 /* main.swift in Sources */,
+<<<<<<< HEAD
 				A99779A225043A0100B82E34 /* Octal.swift in Sources */,
+=======
+				A99779A225043A0100B82E34 /* octal.swift in Sources */,
+				A99779A42504666A00B82E34 /* hexa.swift in Sources */,
+>>>>>>> 41a2bdc... Structure changes
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
