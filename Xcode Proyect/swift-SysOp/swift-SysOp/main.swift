@@ -31,7 +31,6 @@ print("h-",multiBinarios("0110010", por: "0"))   // 0
 print("i-",multiBinarios("1", por: "10101"))   // 10101
 print("i-",multiBinarios("1", por: "10101"))   // 10101
 print("j-",multiBinarios("0110010", por: "1"))   // 110010
->>>>>>> 41a2bdc... Structure changes
 
 print("MULTIPLICACIONES TERMINADAS")
 
