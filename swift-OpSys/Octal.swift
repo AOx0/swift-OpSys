@@ -16,10 +16,10 @@ func sumaOctal(_ num1 : String, más num2 : String ) -> String {
         num2 = num2.replacingOccurrences(of: "-", with: "")
     } else if num1.contains("-") && !num2.contains("-") {
         num1 = num1.replacingOccurrences(of: "-", with: "")
-        return restaBinarios(num2, menos: num1)
+        return restaOctal(num2, menos: num1)
     } else if !num1.contains("-") && num2.contains("-") {
         num2 = num2.replacingOccurrences(of: "-", with: "")
-        return restaBinarios(num1, menos: num2)
+        return restaOctal(num1, menos: num2)
     }
     emparejarNumeros(strNum1: &num1, strNum2: &num2)
     
@@ -46,13 +46,13 @@ func restaOctal(_ num1 : String, menos num2 : String ) -> String {
     if num1.contains("-") && num2.contains("-") {
         num1 = num1.replacingOccurrences(of: "-", with: "")
         num2 = num2.replacingOccurrences(of: "-", with: "")
-        return restaBinarios(num2, menos: num1)
+        return restaOctal(num2, menos: num1)
     } else if num1.contains("-") && !num2.contains("-") {
         num2 = "-" + num2
-        return sumaBinarios(num1, más: num2)
+        return sumaOctal(num1, más: num2)
     } else if !num1.contains("-") && num2.contains("-") {
         num2 = num2.replacingOccurrences(of: "-", with: "")
-        return sumaBinarios(num1, más: num2)
+        return sumaOctal(num1, más: num2)
     }
     
     emparejarNumeros(strNum1: &num1, strNum2: &num2)
@@ -61,21 +61,17 @@ func restaOctal(_ num1 : String, menos num2 : String ) -> String {
         var rTemporal = Int(String(num1[String.Index(utf16Offset: i, in: num1)]))! - Int(String(num2[String.Index(utf16Offset: i, in: num2)]))!
         
         rTemporal -= resto
+        let eraMenor = rTemporal < 0
+        rTemporal += eraMenor ? 8 : 0
         
-        if rTemporal < 0 {
-            rTemporal += 8
-            resto = rTemporal / 8
-            rTemporal = rTemporal % 8
-            resultado = String(rTemporal) + resultado
-        } else {
-            resto = rTemporal / 8
-            rTemporal = rTemporal % 8
-            resultado = String(rTemporal) + resultado
-        }
+        resto = rTemporal / 8
+        resto += eraMenor ? 1 : 0
+        rTemporal = rTemporal % 8
+        add(digito: rTemporal, aResultado: &resultado)
         
     }
     
-    resultado = (resto != 0 ? "-\(restaBinarios(num2, menos: num1))" : resultado)
+    resultado = (resto != 0 ? "-\(restaOctal(num2, menos: num1))" : resultado)
     
     eliminarCerosExtras(Resultado: &resultado )
     return resultado
