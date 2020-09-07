@@ -52,10 +52,6 @@ public struct Resultado {
         return "Cociente = \(cociente) - Residuo = \(residuo)"
     }()
     
-    init(cociente: String, residuo : String) {
-        self.cociente = cociente
-        self.residuo = residuo
-    }
 }
 
 
