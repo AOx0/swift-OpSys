@@ -7,8 +7,14 @@
 
 import Foundation
 
-// MARK: - Suma
+/// Éste módulo contiene las funciones que tienen que ver con operaciones con hexadecimales
+// MARK: - Suma Hexadecimal
 
+/// Suma Binarios de Números Hexadecimales
+/// - Parameters:
+///   - num1: String que contiene un número hexadecimal que actúa como sumando
+///   - num2: String que contiene un número hexadecimal que actúa como sumando
+/// - Returns: String con el resultado de la suma total de la operación num1 + num2 en hexadecimal
 public func sumaHex(_ num1 : String, más num2 : String ) -> String {
     var num1 = num1,  num2 = num2, resultado = "", llevo = 0, esSumaNegativos = false
     
@@ -46,8 +52,13 @@ public func sumaHex(_ num1 : String, más num2 : String ) -> String {
     
 }
 
-// MARK: - Resta
+// MARK: - Resta Hexadecimal
 
+/// Resta de Números Hexadecimales
+/// - Parameters:
+///   - num1: String que contiene un número hexadecimal que actúa como minuendo
+///   - num2: String que contiene un número hexadecimal que actúa como sustraendo
+/// - Returns: String que contiene un número hexadecimal representando la diferencia de la operación num1 - num2
 public func restaHex(_ num1 : String, menos num2 : String ) -> String {
     var num1 = num1,  num2 = num2, resultado = "", resto = 0
     
@@ -88,8 +99,13 @@ public func restaHex(_ num1 : String, menos num2 : String ) -> String {
     return resultado
 }
 
-// MARK: - Multiplicación
+// MARK: - Multiplicación Hexadecimal
 
+/// Multiplicación de Números Hexadecimales
+/// - Parameters:
+///   - num1: String con un numero hexadecimal que actúa como factor
+///   - num2: String con un numero hexadecimal que actúa como factor
+/// - Returns: String con el producto de la multiplicación num1 * num2 en hexadecimal
 public func multiHex(_ num1: String, por num2: String) -> String {
     var num1 = num1, num2 = num2, esNegativo = false
     
@@ -152,9 +168,14 @@ public func multiHex(_ num1: String, por num2: String) -> String {
     return finalResult
 }
 
-// MARK: - Division
+// MARK: - Division Hexadecimal
 
-
+/// División de Números Hexadecimales
+/// Ej: 
+/// - Parameters:
+///   - numerador: String con un numero hexadecimal que actúa como numerador
+///   - denominador: String con un numero hexadecimal que actúa como denominador
+/// - Returns: Una instancia de la estructura Resultado que contiene el cociente y residuo en sus propiedades, resultado de numerador / denominador en hexadecimal
 public func diviHex(_ numerador: String, entre denominador: String) -> Resultado {
     var num1 = numerador, num2 = denominador, esNegativo = false
     var cociente = "0"
@@ -199,7 +220,7 @@ public func diviHex(_ numerador: String, entre denominador: String) -> Resultado
     return Resultado(cociente: cociente, residuo: residuoHex)
 }
 
-func calcularCocienteHex(num2: String, residuoOriginal: String) -> String {
+private func calcularCocienteHex(num2: String, residuoOriginal: String) -> String {
     var residuo = "", num2 = num2, cociente = 0
     repeat {
         cociente += 1
@@ -212,10 +233,16 @@ func calcularCocienteHex(num2: String, residuoOriginal: String) -> String {
 }
 
 
+/// Éste modulo contiene distintas funciones recurrentes necesarias para realizar las opercioens entre Hexadecimales
+// MARK: - Funciones Hexadecimal
 
-// MARK: - Funciones Generales Hexadecimal
 
-
+/// Función privada.
+/// Devuelve una lista remplazando todos los dígitos que representan números iguales o mayores a 10 del sistema Hexadecimal de un String
+/// Ej: obtenerListaDigitos(variable: "1AF78") devuelve [1, 10, 15, 7, 8]
+///
+/// - Parameter variable: String que contiene un número hexadecimal
+/// - Returns: Lista de Integers con el número hexadecimal de "variable"
 func obtenerListaDigitos(variable: String) -> [Int] {
     var listaResultados : [Int] = []
     for digit in variable {
@@ -235,6 +262,11 @@ func obtenerListaDigitos(variable: String) -> [Int] {
 }
 
 
+/// Función privada
+/// Convierte un Integer a Hexadecimal y lo concatena a una variable.
+/// - Parameters:
+///   - digito: Int representando un hexadecimal
+///   - resultado: Variable de tipo String para concatenar el dígito convertido a Hexadecimal
 func add(digito: Int, aResultado resultado: inout String) {
     switch digito {
     case 10: resultado = String("A") + resultado
@@ -248,6 +280,12 @@ func add(digito: Int, aResultado resultado: inout String) {
     }
 }
 
+/// Función privada
+/// Convierte un Character de un número Hexadecimal a un Int representando la misma cantidad
+/// Ej: getDecimal(digito: "A") devuelve 10
+///
+/// - Parameter digito: Character que contiene un dígito en hexadecimal
+/// - Returns: Integer representando en decimal el caracter que se pasa como parámetro
 func getDecimal(digito: Character) -> Int {
     switch digito {
     case "A": return 10
@@ -261,6 +299,13 @@ func getDecimal(digito: Character) -> Int {
     }
 }
 
+
+/// Función privada
+/// Convierte un Integer representando un dígito Hexadecimal en un String con el caracter Hexadecimal que le corresponde
+/// Ej: getHex(digito: 10) devuelve "A"
+///
+/// - Parameter digito: El Integer representando un Hexadecimal
+/// - Returns: Un String que contiene el digito ya convertido a Hexadecimal
 func getHex(digito: Int) -> String {
     switch digito {
     case 10: return "A"

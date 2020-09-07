@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Éste módulo contiene las funciones que tienen que ver con operaciones con octales
 // MARK: - Suma
 
 public func sumaOctal(_ num1 : String, más num2 : String ) -> String {

@@ -7,8 +7,18 @@
 
 import Foundation
 
-// MARK: - Suma
+/// Éste módulo contiene las funciones que tienen que ver con operaciones con binarios
+// MARK: - Suma Binarios
 
+
+/// Función pública: Suma Binarios
+/// Recibe dos números en binario en forma de Strings y devuelve un String con el resultado de su suma
+/// Ej: sumaBinarios("10101", más: "1011") devuelve "100000"
+///
+/// - Parameters:
+///   - num1: String que contiene un número binario que actúa como sumando
+///   - num2: String que contiene un número binario que actúa como sumando
+/// - Returns: String con el resultado de la suma total de la operación num1 + num2
 public func sumaBinarios(_ num1 : String, más num2 : String ) -> String {
     var num1 = num1,  num2 = num2, resultado = "", llevoUno = false, esSumaNegativos = false
     
@@ -51,8 +61,16 @@ public func sumaBinarios(_ num1 : String, más num2 : String ) -> String {
     
 }
 
-// MARK: - Resta
+// MARK: - Resta Binarios
 
+/// Función pública: Resta de Binarios
+/// Recibe dos números en binario en forma de Strings y devuelve un String con el resultado de su resta (el primer parámetro menos el segundo)
+/// Ej: restaBinarios("111010110111001", menos: "101011111") devuelve "111010001011010"
+///
+/// - Parameters:
+///   - num1: String que contiene un número binario que actúa como minuendo
+///   - num2: String que contiene un número binario que actúa como sustraendo
+/// - Returns: String que contiene un número binario representando la diferencia de la operación num1 - num2
 public func restaBinarios(_ num1 : String, menos num2 : String ) -> String {
     var num1 = num1,  num2 = num2, resultado = "", restoUno = false
     
@@ -94,8 +112,16 @@ public func restaBinarios(_ num1 : String, menos num2 : String ) -> String {
     return resultado
 }
 
-// MARK: - Multiplicación
+// MARK: - Multiplicación Binarios
 
+/// Función Publica: Multiplicación de Binarios
+/// Recibe dos números en binario en forma de Strings y devuelve un String con el producto de su multiplicación
+/// Ej: multiBinarios("111010110111001", por: "101011111") devuelve "101000010110100010100111"
+///
+/// - Parameters:
+///   - num1: String con un numero binario que actúa como factor
+///   - num2: String con un numero binario que actúa como factor
+/// - Returns: String con el producto de la multiplicación num1 * num2 en binario
 public func multiBinarios(_ num1: String, por num2: String) -> String {
     var num1 = num1, num2 = num2, esNegativo = false
     
@@ -155,8 +181,18 @@ public func multiBinarios(_ num1: String, por num2: String) -> String {
     return finalResult
 }
 
-// MARK: - Division
+// MARK: - Division Binarios
 
+/// Función publica : División de Binarios
+/// Recibe dos números en binario en forma de Strings y devuelve un objeto de tipo Resultado con el cociente y residuo de su división (parametro 1 entre parametro 2)
+/// Ej: diviBinarios("10101", entre: "10101").cociente devuelve "1"
+///   diviBinarios("10101", entre: "10101").residuo devuelve "0"
+///   diviBinarios("10101", entre: "10101").resultado devuelve "Cociente = 1 - Residuo = 0"
+///
+/// - Parameters:
+///   - numerador: String con un numero binario que actúa como numerador
+///   - denominador: String con un numero binario que actúa como denominador
+/// - Returns: Una instancia de la estructura Resultado que contiene en cociente y residuo en sus propiedades, resultado de numerador / denominador
 public func diviBinarios(_ numerador: String, entre denominador: String) -> Resultado {
     var num1 = numerador, num2 = denominador, esNegativo = false
     var cociente = "0"
