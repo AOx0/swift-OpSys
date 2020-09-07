@@ -1,11 +1,13 @@
 //
-//  Octal.swift
+//  octal.swift
 //  swift-OpSys
 //
 //  Created by Alejandro D on 05/09/20.
 //
 
 import Foundation
+
+// MARK: - Suma
 
 public func sumaOctal(_ num1 : String, más num2 : String ) -> String {
     var num1 = num1,  num2 = num2, resultado = "", llevo = 0, esSumaNegativos = false
@@ -39,6 +41,8 @@ public func sumaOctal(_ num1 : String, más num2 : String ) -> String {
     return resultado
     
 }
+
+// MARK: - Resta
 
 public func restaOctal(_ num1 : String, menos num2 : String ) -> String {
     var num1 = num1,  num2 = num2, resultado = "", resto = 0
@@ -77,6 +81,8 @@ public func restaOctal(_ num1 : String, menos num2 : String ) -> String {
     return resultado
 }
 
+// MARK: - Multiplicación
+
 public func multiOctal(_ num1: String, por num2: String) -> String {
     var num1 = num1, num2 = num2, esNegativo = false
     
@@ -114,17 +120,7 @@ public func multiOctal(_ num1: String, por num2: String) -> String {
     
     var listWithResults : [String] = []
     
-    if num1.contains("-") && num2.contains("-") {
-        esNegativo = false
-        num1 = num1.replacingOccurrences(of: "-", with: "")
-        num2 = num2.replacingOccurrences(of: "-", with: "")
-    } else if num1.contains("-") && !num2.contains("-") {
-        esNegativo = true
-        num1 = num1.replacingOccurrences(of: "-", with: "")
-    } else if !num1.contains("-") && num2.contains("-") {
-        esNegativo = true
-        num2 = num2.replacingOccurrences(of: "-", with: "")
-    }
+    analizarSignos(num1: &num1, num2: &num2, esNegativo: &esNegativo)
     
     emparejarNumeros(strNum1: &num1, strNum2: &num2)
     listWithResults = generarResultados(num1: num1, num2: num2)
@@ -146,23 +142,14 @@ public func multiOctal(_ num1: String, por num2: String) -> String {
     return finalResult
 }
 
+// MARK: - Division
+
 public func diviOctal(_ numerador: String, entre denominador: String) -> Resultado {
     var num1 = numerador, num2 = denominador, esNegativo = false
     var cociente = "0"
     var residuo = ""
-
    
-    if num1.contains("-") && num2.contains("-") {
-        esNegativo = false
-        num1 = num1.replacingOccurrences(of: "-", with: "")
-        num2 = num2.replacingOccurrences(of: "-", with: "")
-    } else if num1.contains("-") && !num2.contains("-") {
-        esNegativo = true
-        num1 = num1.replacingOccurrences(of: "-", with: "")
-    } else if !num1.contains("-") && num2.contains("-") {
-        esNegativo = true
-        num2 = num2.replacingOccurrences(of: "-", with: "")
-    }
+    analizarSignos(num1: &num1, num2: &num2, esNegativo: &esNegativo)
 
     eliminarCerosExtras(Resultado: &num2)
     eliminarCerosExtras(Resultado: &num1)

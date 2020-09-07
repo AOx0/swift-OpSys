@@ -7,50 +7,7 @@
 
 import Foundation
 
-func eliminarCerosExtras(Resultado strR : inout String ) {
-    while strR.count > 1 && strR[strR.startIndex] == "0" {
-        strR.removeFirst()
-    }
-}
-
-extension String {
-
-    func generaSubcadena (desde x : Int, hasta y : Int? = nil) -> String {
-        let final : Int =  y == nil ? self.count : y!
-        
-        if x >= 0 && final > 0 && x < final && final <= self.count && x < self.count {
-            let a : String = String(self[String.Index(utf16Offset: x, in: self)..<String.Index(utf16Offset: final, in: self)])
-            return a
-        }
-        return ""
-    }
-    
-    func obtenerCaracterEn (posicion i : Int) -> Character {
-        if self.count > 0 && i > 0 && i <= self.count {
-            return Character(self.generaSubcadena(desde: i-1, hasta: i))
-        }
-        return Character(" ")
-    }
-    
-}
-
-func emparejarNumeros(strNum1 : inout String, strNum2 : inout String) {
-    var mayor = "1"
-    
-    if strNum2.count > strNum1.count {
-        mayor = "2"
-    }
-    
-    if mayor == "1" {
-        while strNum1.count > strNum2.count {
-            strNum2 = "0" + strNum2
-        }
-    } else {
-        while strNum2.count > strNum1.count {
-            strNum1 = "0" + strNum1
-        }
-    }
-}
+// MARK: - Suma
 
 public func sumaBinarios(_ num1 : String, más num2 : String ) -> String {
     var num1 = num1,  num2 = num2, resultado = "", llevoUno = false, esSumaNegativos = false
@@ -94,7 +51,9 @@ public func sumaBinarios(_ num1 : String, más num2 : String ) -> String {
     
 }
 
-func restaBinarios(_ num1 : String, menos num2 : String ) -> String {
+// MARK: - Resta
+
+public func restaBinarios(_ num1 : String, menos num2 : String ) -> String {
     var num1 = num1,  num2 = num2, resultado = "", restoUno = false
     
     if num1.contains("-") && num2.contains("-") {
@@ -135,6 +94,8 @@ func restaBinarios(_ num1 : String, menos num2 : String ) -> String {
     return resultado
 }
 
+// MARK: - Multiplicación
+
 public func multiBinarios(_ num1: String, por num2: String) -> String {
     var num1 = num1, num2 = num2, esNegativo = false
     
@@ -172,17 +133,7 @@ public func multiBinarios(_ num1: String, por num2: String) -> String {
     
     var listWithResults : [String] = []
     
-    if num1.contains("-") && num2.contains("-") {
-        esNegativo = false
-        num1 = num1.replacingOccurrences(of: "-", with: "")
-        num2 = num2.replacingOccurrences(of: "-", with: "")
-    } else if num1.contains("-") && !num2.contains("-") {
-        esNegativo = true
-        num1 = num1.replacingOccurrences(of: "-", with: "")
-    } else if !num1.contains("-") && num2.contains("-") {
-        esNegativo = true
-        num2 = num2.replacingOccurrences(of: "-", with: "")
-    }
+    analizarSignos(num1: &num1, num2: &num2, esNegativo: &esNegativo)
     
     emparejarNumeros(strNum1: &num1, strNum2: &num2)
     listWithResults = generarResultados(num1: num1, num2: num2)
@@ -204,24 +155,14 @@ public func multiBinarios(_ num1: String, por num2: String) -> String {
     return finalResult
 }
 
+// MARK: - Division
 
 public func diviBinarios(_ numerador: String, entre denominador: String) -> Resultado {
     var num1 = numerador, num2 = denominador, esNegativo = false
     var cociente = "0"
     var residuo = ""
 
-   
-    if num1.contains("-") && num2.contains("-") {
-        esNegativo = false
-        num1 = num1.replacingOccurrences(of: "-", with: "")
-        num2 = num2.replacingOccurrences(of: "-", with: "")
-    } else if num1.contains("-") && !num2.contains("-") {
-        esNegativo = true
-        num1 = num1.replacingOccurrences(of: "-", with: "")
-    } else if !num1.contains("-") && num2.contains("-") {
-        esNegativo = true
-        num2 = num2.replacingOccurrences(of: "-", with: "")
-    }
+    analizarSignos(num1: &num1, num2: &num2, esNegativo: &esNegativo)
 
     eliminarCerosExtras(Resultado: &num2)
     eliminarCerosExtras(Resultado: &num1)
@@ -259,13 +200,5 @@ public func diviBinarios(_ numerador: String, entre denominador: String) -> Resu
     return Resultado(cociente: cociente, residuo: residuo)
 }
 
-public struct Resultado {
-    let cociente : String
-    let residuo  : String
-    
-    func todoResultado() -> String {
-        return "Cociente = \(cociente) - Residuo = \(residuo)"
-    }
-}
 
 

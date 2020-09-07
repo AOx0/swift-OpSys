@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A99779C62504D1DF00B82E34 /* binario.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99779C22504D1DF00B82E34 /* binario.swift */; };
-		A99779C72504D1DF00B82E34 /* hexa.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99779C32504D1DF00B82E34 /* hexa.swift */; };
 		A99779C82504D1DF00B82E34 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99779C42504D1DF00B82E34 /* main.swift */; };
-		A99779C92504D1DF00B82E34 /* octal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99779C52504D1DF00B82E34 /* octal.swift */; };
+		A9E4A3BB250608A30064071F /* hexa.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E4A3B8250608A30064071F /* hexa.swift */; };
+		A9E4A3BC250608A30064071F /* octal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E4A3B9250608A30064071F /* octal.swift */; };
+		A9E4A3BD250608A30064071F /* binario.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E4A3BA250608A30064071F /* binario.swift */; };
+		A9E4A3BF25060A0C0064071F /* swift_OpSys.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E4A3BE25060A0C0064071F /* swift_OpSys.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,10 +28,11 @@
 
 /* Begin PBXFileReference section */
 		A99779B02504D14E00B82E34 /* swift-SysOp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "swift-SysOp"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A99779C22504D1DF00B82E34 /* binario.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = binario.swift; sourceTree = "<group>"; };
-		A99779C32504D1DF00B82E34 /* hexa.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = hexa.swift; sourceTree = "<group>"; };
 		A99779C42504D1DF00B82E34 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		A99779C52504D1DF00B82E34 /* octal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = octal.swift; sourceTree = "<group>"; };
+		A9E4A3B8250608A30064071F /* hexa.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = hexa.swift; path = "../../../Sources/swift-OpSys/hexa.swift"; sourceTree = "<group>"; };
+		A9E4A3B9250608A30064071F /* octal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = octal.swift; path = "../../../Sources/swift-OpSys/octal.swift"; sourceTree = "<group>"; };
+		A9E4A3BA250608A30064071F /* binario.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = binario.swift; path = "../../../Sources/swift-OpSys/binario.swift"; sourceTree = "<group>"; };
+		A9E4A3BE25060A0C0064071F /* swift_OpSys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = swift_OpSys.swift; path = "../../../Sources/swift-OpSys/swift_OpSys.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,9 +66,10 @@
 			isa = PBXGroup;
 			children = (
 				A99779C42504D1DF00B82E34 /* main.swift */,
-				A99779C22504D1DF00B82E34 /* binario.swift */,
-				A99779C52504D1DF00B82E34 /* octal.swift */,
-				A99779C32504D1DF00B82E34 /* hexa.swift */,
+				A9E4A3BA250608A30064071F /* binario.swift */,
+				A9E4A3B8250608A30064071F /* hexa.swift */,
+				A9E4A3B9250608A30064071F /* octal.swift */,
+				A9E4A3BE25060A0C0064071F /* swift_OpSys.swift */,
 			);
 			path = "swift-SysOp";
 			sourceTree = "<group>";
@@ -129,10 +132,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A99779C62504D1DF00B82E34 /* binario.swift in Sources */,
-				A99779C92504D1DF00B82E34 /* octal.swift in Sources */,
-				A99779C72504D1DF00B82E34 /* hexa.swift in Sources */,
+				A9E4A3BD250608A30064071F /* binario.swift in Sources */,
+				A9E4A3BC250608A30064071F /* octal.swift in Sources */,
+				A9E4A3BF25060A0C0064071F /* swift_OpSys.swift in Sources */,
 				A99779C82504D1DF00B82E34 /* main.swift in Sources */,
+				A9E4A3BB250608A30064071F /* hexa.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
