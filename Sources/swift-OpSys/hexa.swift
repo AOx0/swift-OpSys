@@ -7,7 +7,7 @@
 
 import Foundation
 
-func sumaHex(_ num1 : String, más num2 : String ) -> String {
+public func sumaHex(_ num1 : String, más num2 : String ) -> String {
     var num1 = num1,  num2 = num2, resultado = "", llevo = 0, esSumaNegativos = false
     
     if num1.contains("-") && num2.contains("-") {
@@ -44,7 +44,7 @@ func sumaHex(_ num1 : String, más num2 : String ) -> String {
     
 }
 
-func restaHex(_ num1 : String, menos num2 : String ) -> String {
+public func restaHex(_ num1 : String, menos num2 : String ) -> String {
     var num1 = num1,  num2 = num2, resultado = "", resto = 0
     
     if num1.contains("-") && num2.contains("-") {
@@ -84,7 +84,7 @@ func restaHex(_ num1 : String, menos num2 : String ) -> String {
     return resultado
 }
 
-func multiHex(_ num1: String, por num2: String) -> String {
+public func multiHex(_ num1: String, por num2: String) -> String {
     var num1 = num1, num2 = num2, esNegativo = false
     
     func generarResultados(num1: String, num2 : String) -> [String] {
@@ -215,7 +215,7 @@ func getHex(digito: Int) -> String {
 }
 
 
-func diviHex(_ numerador: String, entre denominador: String) -> Resultado {
+public func diviHex(_ numerador: String, entre denominador: String) -> Resultado {
     var num1 = numerador, num2 = denominador, esNegativo = false
     var cociente = "0"
     var residuoHex = ""
@@ -266,6 +266,7 @@ func diviHex(_ numerador: String, entre denominador: String) -> Resultado {
     }
         
     eliminarCerosExtras(Resultado: &cociente)
+    eliminarCerosExtras(Resultado: &residuoHex)
     if esNegativo { cociente = "-" + cociente }
     return Resultado(cociente: cociente, residuo: residuoHex)
 }
@@ -283,14 +284,4 @@ func calcularCocienteHex(num2: String, residuoOriginal: String) -> String {
     return getHex(digito: cociente)
 }
 
-extension String {
-    func generaSubcadenaHex (desde x : Int, hasta y : Int? = nil) -> [Int] {
-        let final : Int =  y == nil ? self.count : y!
-        
-        if x >= 0 && final > 0 && x < final && final <= self.count && x < self.count {
-            let a : String = String(self[String.Index(utf16Offset: x, in: self)..<String.Index(utf16Offset: final, in: self)])
-            return obtenerListaDigitos(variable: a)
-        }
-        return []
-    }
-}
+

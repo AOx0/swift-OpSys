@@ -1,6 +1,6 @@
 
 
-#if !DEBUG
+#if DEBUG
 
 print("101010 entre: 0 " , diviBinarios("101010", entre: "0"))
 print("0 entre: 101010 " , diviBinarios("0", entre: "101010"))
