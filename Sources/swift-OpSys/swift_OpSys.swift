@@ -48,9 +48,13 @@ extension String {
 public struct Resultado {
     public let cociente : String
     public let residuo  : String
-    public lazy var resultado : String = {
-        return "Cociente = \(cociente) - Residuo = \(residuo)"
-    }()
+    public let resultado : String
+    
+    public init(cociente: String, residuo: String) {
+        self.cociente = cociente
+        self.residuo = residuo
+        self.resultado = "Cociente: \(cociente) - Residuo: \(residuo)"
+    }
     
 }
 
