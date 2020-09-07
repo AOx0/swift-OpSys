@@ -1,6 +1,0 @@
-version: "Apple Swift version 5.3 (swiftlang-1200.0.16.13 clang-1200.0.22.25)"
-options: "6e9ea8a497025d618fa6ac8588c732ac"
-build_time: [1599410984, 880092000]
-inputs:
-  "/Users/alejandro/swift-OpSys/Tests/swift-OpSysTests/XCTestManifests.swift": [1599380156, 715073808]
-  "/Users/alejandro/swift-OpSys/Tests/swift-OpSysTests/swift_OpSysTests.swift": [1599410980, 501253177]
