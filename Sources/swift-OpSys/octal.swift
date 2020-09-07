@@ -8,8 +8,16 @@
 import Foundation
 
 /// Éste módulo contiene las funciones que tienen que ver con operaciones con octales
-// MARK: - Suma
+// MARK: - Suma Octal
 
+/// Función pública: Suma Octal
+/// Recibe dos números en octal en forma de Strings y devuelve un String con el resultado de su suma
+/// Ej: sumaOctal("7123", más: "1421") devuelve "10544"
+///
+/// - Parameters:
+///   - num1: String que contiene un número octal que actúa como sumando
+///   - num2: String que contiene un número octal que actúa como sumando
+/// - Returns: String con el resultado de la suma total de la operación num1 + num2
 public func sumaOctal(_ num1 : String, más num2 : String ) -> String {
     var num1 = num1,  num2 = num2, resultado = "", llevo = 0, esSumaNegativos = false
     
@@ -43,8 +51,16 @@ public func sumaOctal(_ num1 : String, más num2 : String ) -> String {
     
 }
 
-// MARK: - Resta
+// MARK: - Resta Octal
 
+/// Función pública: Resta Octal
+/// Recibe dos números en octal en forma de Strings y devuelve un String con el resultado de su resta (el primer parámetro menos el segundo)
+/// Ej: restaOctal("7123", menos: "1421") devuelve "5502"
+///
+/// - Parameters:
+///   - num1: String que contiene un número octal que actúa como minuendo
+///   - num2: String que contiene un número octal que actúa como sustraendo
+/// - Returns: String que contiene un número octal representando la diferencia de la operación num1 - num2
 public func restaOctal(_ num1 : String, menos num2 : String ) -> String {
     var num1 = num1,  num2 = num2, resultado = "", resto = 0
     
@@ -82,8 +98,16 @@ public func restaOctal(_ num1 : String, menos num2 : String ) -> String {
     return resultado
 }
 
-// MARK: - Multiplicación
+// MARK: - Multiplicación Octal
 
+/// Función Publica: Multiplicación Octal
+/// Recibe dos números en octal en forma de Strings y devuelve un String con el producto de su multiplicación
+/// Ej: multiOctal("7123", por: "1421") devuelve "12766203"
+///
+/// - Parameters:
+///   - num1: String con un numero octal que actúa como factor
+///   - num2: String con un numero octal que actúa como factor
+/// - Returns: String con el producto de la multiplicación num1 * num2 en octal
 public func multiOctal(_ num1: String, por num2: String) -> String {
     var num1 = num1, num2 = num2, esNegativo = false
     
@@ -143,8 +167,18 @@ public func multiOctal(_ num1: String, por num2: String) -> String {
     return finalResult
 }
 
-// MARK: - Division
+// MARK: - Division Octal
 
+/// Función publica : División Octal
+/// Recibe dos números en octal en forma de Strings y devuelve un objeto de tipo Resultado con el cociente y residuo de su división (parametro 1 entre parametro 2)
+/// Ej: diviOctal("7123", entre: "1421").cociente devuelve "4"
+///   diviOctal("7123", entre: "1421").residuo devuelve "1017"
+///   diviOctal("7123", entre: "1421").resultado devuelve "Cociente = 4 - Residuo = 1017"
+///
+/// - Parameters:
+///   - numerador: String con un numero octal que actúa como numerador
+///   - denominador: String con un numero octal que actúa como denominador
+/// - Returns: Una instancia de la estructura Resultado que contiene en cociente y residuo en sus propiedades, resultado de numerador / denominador
 public func diviOctal(_ numerador: String, entre denominador: String) -> Resultado {
     var num1 = numerador, num2 = denominador, esNegativo = false
     var cociente = "0"

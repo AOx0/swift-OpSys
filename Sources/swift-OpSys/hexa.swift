@@ -10,11 +10,14 @@ import Foundation
 /// Éste módulo contiene las funciones que tienen que ver con operaciones con hexadecimales
 // MARK: - Suma Hexadecimal
 
-/// Suma Binarios de Números Hexadecimales
+/// Función pública: Suma Hexadecimal
+/// Recibe dos números en hexadecimal en forma de Strings y devuelve un String con el resultado de su suma
+/// Ej: sumaHex("A51F9", más: "FFF") devuelve "A61F8"
+///
 /// - Parameters:
 ///   - num1: String que contiene un número hexadecimal que actúa como sumando
 ///   - num2: String que contiene un número hexadecimal que actúa como sumando
-/// - Returns: String con el resultado de la suma total de la operación num1 + num2 en hexadecimal
+/// - Returns: String con el resultado de la suma total de la operación num1 + num2
 public func sumaHex(_ num1 : String, más num2 : String ) -> String {
     var num1 = num1,  num2 = num2, resultado = "", llevo = 0, esSumaNegativos = false
     
@@ -54,7 +57,10 @@ public func sumaHex(_ num1 : String, más num2 : String ) -> String {
 
 // MARK: - Resta Hexadecimal
 
-/// Resta de Números Hexadecimales
+/// Función pública: Resta Hexadecimal
+/// Recibe dos números en hexadecimal en forma de Strings y devuelve un String con el resultado de su resta (el primer parámetro menos el segundo)
+/// Ej: restaHex("A51F9", menos: "FFF") devuelve "A41FA"
+///
 /// - Parameters:
 ///   - num1: String que contiene un número hexadecimal que actúa como minuendo
 ///   - num2: String que contiene un número hexadecimal que actúa como sustraendo
@@ -101,7 +107,10 @@ public func restaHex(_ num1 : String, menos num2 : String ) -> String {
 
 // MARK: - Multiplicación Hexadecimal
 
-/// Multiplicación de Números Hexadecimales
+/// Función Publica: Multiplicación Hexadecimal
+/// Recibe dos números en hexadecimal en forma de Strings y devuelve un String con el producto de su multiplicación
+/// Ej: multiHex("A51F9", por: "FFF") devuelve "A5153E07"
+///
 /// - Parameters:
 ///   - num1: String con un numero hexadecimal que actúa como factor
 ///   - num2: String con un numero hexadecimal que actúa como factor
@@ -170,12 +179,16 @@ public func multiHex(_ num1: String, por num2: String) -> String {
 
 // MARK: - Division Hexadecimal
 
-/// División de Números Hexadecimales
-/// Ej: 
+/// Función publica : División Hexadecimal
+/// Recibe dos números en hexadecimal en forma de Strings y devuelve un objeto de tipo Resultado con el cociente y residuo de su división (parametro 1 entre parametro 2)
+/// Ej: diviHex("A5153E07", entre: "FFF").cociente devuelve "A51F9"
+///   diviHex("A5153E07", entre: "FFF").residuo devuelve "0"
+///   diviHex("A5153E07", entre: "FFF").resultado devuelve "Cociente = A51F9 - Residuo = "0"
+///
 /// - Parameters:
 ///   - numerador: String con un numero hexadecimal que actúa como numerador
 ///   - denominador: String con un numero hexadecimal que actúa como denominador
-/// - Returns: Una instancia de la estructura Resultado que contiene el cociente y residuo en sus propiedades, resultado de numerador / denominador en hexadecimal
+/// - Returns: Una instancia de la estructura Resultado que contiene en cociente y residuo en sus propiedades, resultado de numerador / denominador
 public func diviHex(_ numerador: String, entre denominador: String) -> Resultado {
     var num1 = numerador, num2 = denominador, esNegativo = false
     var cociente = "0"
