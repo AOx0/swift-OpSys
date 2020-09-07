@@ -65,8 +65,8 @@
 			children = (
 				A99779C42504D1DF00B82E34 /* main.swift */,
 				A99779C22504D1DF00B82E34 /* binario.swift */,
-				A99779C32504D1DF00B82E34 /* hexa.swift */,
 				A99779C52504D1DF00B82E34 /* octal.swift */,
+				A99779C32504D1DF00B82E34 /* hexa.swift */,
 			);
 			path = "swift-SysOp";
 			sourceTree = "<group>";

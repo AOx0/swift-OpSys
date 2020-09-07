@@ -1,0 +1,19 @@
+{
+  "builtTestProducts" : [
+    {
+      "binaryPath" : "\/Users\/alejandro\/swift-OpSys\/.build\/x86_64-apple-macosx\/debug\/swift-OpSysPackageTests.xctest\/Contents\/MacOS\/swift-OpSysPackageTests",
+      "packageName" : "swift-OpSys",
+      "productName" : "swift-OpSysPackageTests"
+    }
+  ],
+  "copyCommands" : {
+
+  },
+  "swiftTargetMap" : {
+    "C.swift-OpSys-debug.module" : "swift-OpSys",
+    "C.swift-OpSysTests-debug.module" : "swift-OpSysTests"
+  },
+  "testDiscoveryCommands" : {
+
+  }
+}

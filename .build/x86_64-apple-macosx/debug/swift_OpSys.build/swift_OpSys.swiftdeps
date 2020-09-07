@@ -1,0 +1,22 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "swift_OpSys"
+provides-nominal:
+- "11swift_OpSysAAV"
+provides-member:
+- ["11swift_OpSysAAV", ""]
+provides-dynamic-lookup:
+depends-top-level:
+- "StringLiteralType"
+- "swift_OpSys"
+depends-member:
+- ["s34_ExpressibleByBuiltinStringLiteralP", "init"]
+- ["11swift_OpSysAAV", "init"]
+- ["11swift_OpSysAAV", "text"]
+depends-nominal:
+- "s34_ExpressibleByBuiltinStringLiteralP"
+- "11swift_OpSysAAV"
+depends-dynamic-lookup:
+depends-external:
+- "/Users/alejandro/swift-OpSys/.build/x86_64-apple-macosx/debug/swift_OpSys.build/module.modulemap"
+interface-hash: "af115e4774b16b1eb689152d611aa796"

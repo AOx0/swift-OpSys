@@ -145,3 +145,71 @@ func multiOctal(_ num1: String, por num2: String) -> String {
     if esNegativo { finalResult = "-" + finalResult }
     return finalResult
 }
+
+func diviOctal(_ numerador: String, entre denominador: String) -> Resultado {
+    var num1 = numerador, num2 = denominador, esNegativo = false
+    var cociente = "0"
+    var residuo = ""
+
+   
+    if num1.contains("-") && num2.contains("-") {
+        esNegativo = false
+        num1 = num1.replacingOccurrences(of: "-", with: "")
+        num2 = num2.replacingOccurrences(of: "-", with: "")
+    } else if num1.contains("-") && !num2.contains("-") {
+        esNegativo = true
+        num1 = num1.replacingOccurrences(of: "-", with: "")
+    } else if !num1.contains("-") && num2.contains("-") {
+        esNegativo = true
+        num2 = num2.replacingOccurrences(of: "-", with: "")
+    }
+
+    eliminarCerosExtras(Resultado: &num2)
+    eliminarCerosExtras(Resultado: &num1)
+    
+    if num2 == "0" {
+         return Resultado(cociente: "Infinito", residuo: "0")
+    } else if num1 == "0" {
+         return Resultado(cociente: "0", residuo: "0")
+    } else if Int(num1, radix:8)! < Int(num2, radix:8)! {
+        return Resultado(cociente: "0", residuo: num1)
+    } else {
+        var fin : Int = num2.count
+        cociente = ""
+        residuo = fin <= num1.count ? num1.generaSubcadena(desde: 0 , hasta: num2.count) : ""
+         
+        while fin <= num1.count {
+            if  Int(num2,radix:8)! <= Int(residuo,radix:8)! {
+                let cocienteCalculado = calcularCociente(num2: num2, residuoOriginal: residuo)
+//                print("Residuo ", residuo, "(\(residuo)-\(multiOctal(num2, por: cocienteCalculado)))")
+                residuo = restaOctal(residuo, menos: multiOctal(num2, por: cocienteCalculado))
+                eliminarCerosExtras(Resultado: &residuo)
+//                print("Residuo despúes de resta: ", residuo, "(\(residuo)-\(multiOctal(num2, por: cocienteCalculado)))")
+                cociente += cocienteCalculado
+            } else {
+                cociente = cociente + "0"
+            }
+            fin += 1
+            if fin <= num1.count {
+                residuo = residuo + String (num1.obtenerCaracterEn(posicion : fin))
+                eliminarCerosExtras(Resultado: &residuo)
+            }
+        }
+    }
+        
+    eliminarCerosExtras(Resultado: &cociente)
+    if esNegativo { cociente = "-" + cociente }
+    return Resultado(cociente: cociente, residuo: residuo)
+}
+
+
+func calcularCociente(num2: String, residuoOriginal: String) -> String {
+    var residuo = "", num2 = num2, cociente = 0
+    repeat {
+        cociente += 1
+        residuo = restaOctal(residuoOriginal, menos: multiOctal(num2, por: String(cociente)))
+        eliminarCerosExtras(Resultado: &residuo)
+    } while Int(residuo,radix:8)! >= Int(num2,radix:8)!
+    
+    return "\(cociente)"
+}

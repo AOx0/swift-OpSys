@@ -1,0 +1,4 @@
+module swift_OpSys {
+    header "/Users/alejandro/swift-OpSys/.build/x86_64-apple-macosx/debug/swift_OpSys.build/swift-OpSys-Swift.h"
+    requires objc
+}

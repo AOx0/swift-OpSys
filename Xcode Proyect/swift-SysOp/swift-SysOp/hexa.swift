@@ -61,7 +61,7 @@ func restaHex(_ num1 : String, menos num2 : String ) -> String {
     
     emparejarNumeros(strNum1: &num1, strNum2: &num2)
     
-    let num1List = obtenerListaDigitos(variable: num1)
+    let num1List = obtenerListaDigitos(variable: num1) //124F [1,2,4,15]
     let num2List = obtenerListaDigitos(variable: num2)
     
     for i in (0..<num1.count).reversed() {
@@ -174,6 +174,24 @@ func obtenerListaDigitos(variable: String) -> [Int] {
     return listaResultados
 }
 
+func restablecerObtenerListaDigitos(variable: [Int]) -> String {
+    var resultado = ""
+    for digit in variable {
+        switch digit {
+        case 10: resultado = String("A") + resultado
+        case 11: resultado = String("B") + resultado
+        case 12: resultado = String("C") + resultado
+        case 13: resultado = String("D") + resultado
+        case 14: resultado = String("E") + resultado
+        case 15: resultado = String("F") + resultado
+        default:
+            resultado = String(digit) + resultado
+        }
+    }
+    
+    return resultado
+}
+
 
 func add(digito: Int, aResultado resultado: inout String) {
     switch digito {
@@ -211,5 +229,93 @@ func getHex(digito: Int) -> String {
     case 15: return "F"
     default:
         return String(digito)
+    }
+}
+
+
+func diviHex(_ numerador: String, entre denominador: String) -> Resultado {
+    var num1 = numerador, num2 = denominador, esNegativo = false
+    var cociente = "0"
+    var residuoHex = ""
+    var residuoLista : [Int] = []
+
+
+   
+    if num1.contains("-") && num2.contains("-") {
+        esNegativo = false
+        num1 = num1.replacingOccurrences(of: "-", with: "")
+        num2 = num2.replacingOccurrences(of: "-", with: "")
+    } else if num1.contains("-") && !num2.contains("-") {
+        esNegativo = true
+        num1 = num1.replacingOccurrences(of: "-", with: "")
+    } else if !num1.contains("-") && num2.contains("-") {
+        esNegativo = true
+        num2 = num2.replacingOccurrences(of: "-", with: "")
+    }
+
+    eliminarCerosExtras(Resultado: &num2)
+    eliminarCerosExtras(Resultado: &num1)
+    
+    if num2 == "0" {
+         return Resultado(cociente: "Infinito", residuo: "0")
+    } else if num1 == "0" {
+         return Resultado(cociente: "0", residuo: "0")
+    } else if Int(num1, radix:16)! < Int(num2, radix:16)! {
+        return Resultado(cociente: "0", residuo: num1)
+    } else {
+        var fin : Int = num2.count
+        cociente = ""
+        residuoHex = fin <= num1.count ? num1.generaSubcadena(desde: 0 , hasta: num2.count) : ""
+        residuoLista = fin <= num1.count ? num1.generaSubcadenaHex(desde: 0 , hasta: num2.count) : []
+        print("Residuo inicial ",residuoHex)
+        
+        while fin <= num1.count {
+            if  Int(num2,radix:16)! <= Int(residuoHex,radix:16)! {
+                let cocienteCalculado = calcularCocienteHex(num2: num2, residuoOriginal: residuoHex)
+                print("cocienteCalculado", cocienteCalculado)
+                print("residuoHex", residuoHex)
+                residuoHex = restaHex(residuoHex, menos: multiHex(num2, por: cocienteCalculado))
+                print("residuoHex", residuoHex)
+                eliminarCerosExtras(Resultado: &residuoHex)
+                cociente += cocienteCalculado
+//                add(digito: Int(cocienteCalculado)!, aResultado: &cociente)
+            } else {
+                cociente = cociente + "0"
+            }
+            fin += 1
+            if fin <= num1.count {
+                residuoHex = residuoHex + String (num1.obtenerCaracterEn(posicion : fin))
+                eliminarCerosExtras(Resultado: &residuoHex)
+            }
+        }
+    }
+        
+    eliminarCerosExtras(Resultado: &cociente)
+    if esNegativo { cociente = "-" + cociente }
+    return Resultado(cociente: cociente, residuo: residuoHex)
+}
+
+
+func calcularCocienteHex(num2: String, residuoOriginal: String) -> String {
+    var residuo = "", num2 = num2, cociente = 0
+    repeat {
+        cociente += 1
+        residuo = restaHex(residuoOriginal, menos: multiHex(num2, por: getHex(digito: cociente)))
+        eliminarCerosExtras(Resultado: &residuo)
+    } while Int(residuo,radix:16)! >= Int(num2,radix:16)!
+    
+    
+    return getHex(digito: cociente)
+}
+
+extension String {
+    func generaSubcadenaHex (desde x : Int, hasta y : Int? = nil) -> [Int] {
+        let final : Int =  y == nil ? self.count : y!
+        
+        if x >= 0 && final > 0 && x < final && final <= self.count && x < self.count {
+            let a : String = String(self[String.Index(utf16Offset: x, in: self)..<String.Index(utf16Offset: final, in: self)])
+            return obtenerListaDigitos(variable: a)
+        }
+        return []
     }
 }

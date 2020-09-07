@@ -15,8 +15,8 @@ func eliminarCerosExtras(Resultado strR : inout String ) {
 
 extension String {
 
-    func generaSubcadena (desde x : Int, hasta y : Int = 0) -> String {
-        let final : Int =  y == 0 ? self.count : y
+    func generaSubcadena (desde x : Int, hasta y : Int? = nil) -> String {
+        let final : Int =  y == nil ? self.count : y!
         
         if x >= 0 && final > 0 && x < final && final <= self.count && x < self.count {
             let a : String = String(self[String.Index(utf16Offset: x, in: self)..<String.Index(utf16Offset: final, in: self)])
@@ -24,6 +24,7 @@ extension String {
         }
         return ""
     }
+    
     func obtenerCaracterEn (posicion i : Int) -> Character {
         if self.count > 0 && i > 0 && i <= self.count {
             return Character(self.generaSubcadena(desde: i-1, hasta: i))
@@ -204,7 +205,7 @@ func multiBinarios(_ num1: String, por num2: String) -> String {
 }
 
 
-func diviBinarios(_ numerador: String, entre denominador: String) -> String {
+func diviBinarios(_ numerador: String, entre denominador: String) -> Resultado {
     var num1 = numerador, num2 = denominador, esNegativo = false
     var cociente = "0"
     var residuo = ""
@@ -226,11 +227,11 @@ func diviBinarios(_ numerador: String, entre denominador: String) -> String {
     eliminarCerosExtras(Resultado: &num1)
     
     if num2 == "0" {
-         return "Infinito"
+         return Resultado(cociente: "Infinito", residuo: "0")
     } else if num1 == "0" {
-         return "0"
+         return Resultado(cociente: "0", residuo: "0")
     } else if Int(num1, radix: 2)! < Int(num2, radix: 2)! {
-         return "0"
+        return Resultado(cociente: "0", residuo: num1)
     } else {
         var fin : Int = num2.count
         cociente = ""
@@ -253,8 +254,16 @@ func diviBinarios(_ numerador: String, entre denominador: String) -> String {
     }
         
     if esNegativo { cociente = "-" + cociente }
-    print("cosciente=", cociente, " residuo=", residuo, terminator: "\n")
-    return cociente
+    return Resultado(cociente: cociente, residuo: residuo)
+}
+
+struct Resultado {
+    let cociente : String
+    let residuo  : String
+    
+    func todoResultado() -> String {
+        return "Cociente = \(cociente) - Residuo = \(residuo)"
+    }
 }
 
 

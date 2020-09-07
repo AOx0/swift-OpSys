@@ -1,6 +1,6 @@
 
 
-#if DEBUG
+#if !DEBUG
 
 print("101010 entre: 0 " , diviBinarios("101010", entre: "0"))
 print("0 entre: 101010 " , diviBinarios("0", entre: "101010"))
@@ -48,8 +48,28 @@ print(sumaBinarios("10101", más: "-1011"))
 
 print("SUMAS TERMINADAS")
 
+print(diviOctal("225316", entre: "556"))
+print(diviOctal("225316", entre: "321"))
+print(diviOctal("2635730", entre: "32"))
+print(diviOctal("2635730", entre: "67234"))
+print(diviOctal("2635734", entre: "32"))
+print(diviOctal("2635735", entre: "67234"))
+
+print("DIVISIONES OCTALES TERMINADAS")
+
 #else
 
-print(multiBinarios("1011", por: "10101"))
+//print(restaHex("A7C", menos: "9B7"))
+//print(multiHex("A7C", por: "1"))
+//print(restaHex("A7C", menos: "A7C"))
+//print(diviHex("A7C", entre: "2"))
+//print(diviHex("A7C", entre: "1"))
+//print(diviHex("A7C8", entre: "33D"))
+print(diviHex("A7C89", entre: "33D"))
+print(diviHex("144", entre: "24"))
+print(diviHex("47C89", entre: "47C89"))
+print(diviHex("FFF", entre: "FFF"))
+print(diviHex("FFF", entre: "333"))
+print(diviHex("FFE", entre: "333"))
 
 #endif

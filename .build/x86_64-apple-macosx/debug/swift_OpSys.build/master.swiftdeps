@@ -1,0 +1,5 @@
+version: "Apple Swift version 5.3 (swiftlang-1200.0.16.13 clang-1200.0.22.25)"
+options: "8006d292ad689215a7fb678edb60c348"
+build_time: [1599410795, 136814000]
+inputs:
+  "/Users/alejandro/swift-OpSys/Sources/swift-OpSys/swift_OpSys.swift": [1599380156, 710795016]
