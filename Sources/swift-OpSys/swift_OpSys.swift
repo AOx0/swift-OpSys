@@ -7,9 +7,10 @@
 
 import Foundation
 
-// MARK: - Funciones Generales
-/// Éste módulo contiene varias funciones recurrentes a lo largo del programa. Que ayudan a formatear variables.
+/// Éste módulo contiene varias funciones, estructuras y extensiones recurrentes a lo largo del programa. Que ayudan a formatear variables.
 
+
+// MARK: - Extensiones String
 
 extension String {
     
@@ -21,16 +22,21 @@ extension String {
     ///   - x: Integer con Index inicial
     ///   - y: Integer con Index final, opcional
     /// - Returns: String conteniendo la nueva cadena de caracteres desde el punto inicial hasta el punto final indicados
-    func generaSubcadena (desde x : Int, hasta y : Int? = nil) -> String {
-        let final : Int =  y == nil ? self.count : y!
+    func generaSubcadena (desde indexInicial : Int, hasta indexFinal : Int? = nil) -> String {
+        let final : Int =  indexFinal == nil ? self.count : indexFinal!
         
-        if x >= 0 && final > 0 && x < final && final <= self.count && x < self.count {
-            let a : String = String(self[String.Index(utf16Offset: x, in: self)..<String.Index(utf16Offset: final, in: self)])
+        if indexInicial >= 0 && final > 0 && indexInicial < final && final <= self.count && indexInicial < self.count {
+            let a : String = String(self[String.Index(utf16Offset: indexInicial, in: self)..<String.Index(utf16Offset: final, in: self)])
             return a
         }
         return ""
     }
     
+    
+    /// Devuelve el caracter en la posición indicada de un String.
+    /// No tiene handling de error de index
+    /// - Parameter i: index deseado
+    /// - Returns: Caracter en la posición indicada
     func obtenerCaracterEn (posicion i : Int) -> Character {
         if self.count > 0 && i > 0 && i <= self.count {
             return Character(self.generaSubcadena(desde: i-1, hasta: i))
@@ -39,6 +45,9 @@ extension String {
     }
     
 }
+
+
+// MARK: - Estructura Resultado
 
 /// Estructura que sirve para devolver el resultado de divisiones a lo largo del programa.
 /// Tiene 3 propiedades que contienen un residuo y un cociente junto con una propiedad que devuelve todo el resultado en un String.
@@ -58,7 +67,7 @@ public struct Resultado {
     
 }
 
-
+// MARK: - Funciones
 /// Función privada.
 /// Empareja el largo de dos cantidades contenidas en Strings agregando ceros a la izquierda para no modificarla, modifica directamente la variable pasada como parámetro. (apuntadores).
 /// Ésto sirve para poder realizar las operaciones sin el riesgo de que exista un error de index al acceder a dos caracteres a multiplicar, sumar, restar, etc.
@@ -71,21 +80,13 @@ public struct Resultado {
 /// - Parameters:
 ///   - strNum1: Apuntador a una variable String
 ///   - strNum2: Apuntador a una variable String
-func emparejarNumeros(strNum1 : inout String, strNum2 : inout String) {
-    var mayor = "1"
-    
-    if strNum2.count > strNum1.count {
-        mayor = "2"
-    }
+func emparejarLongitud(de num1: inout String, y num2: inout String) {
+    let mayor = num2.count > num1.count ? "2" : "1"
     
     if mayor == "1" {
-        while strNum1.count > strNum2.count {
-            strNum2 = "0" + strNum2
-        }
+        while num1.count > num2.count { num2 = "0" + num2 }
     } else {
-        while strNum2.count > strNum1.count {
-            strNum1 = "0" + strNum1
-        }
+        while num2.count > num1.count { num1 = "0" + num1 }
     }
 }
 
@@ -97,9 +98,9 @@ func emparejarNumeros(strNum1 : inout String, strNum2 : inout String) {
 ///      eliminarCerosExtras(Resultado: num1) - al final num1 es "0"
 ///
 /// - Parameter strR: Apuntador a una variable String, lleva el nombre de resultado ya que para éstos se creó
-func eliminarCerosExtras(Resultado strR : inout String ) {
-    while strR.count > 1 && strR[strR.startIndex] == "0" {
-        strR.removeFirst()
+func eliminarCerosExtras(deCantidad cantidad : inout String ) {
+    while cantidad.count > 1 && cantidad[cantidad.startIndex] == "0" {
+        cantidad.removeFirst()
     }
 }
 
@@ -110,7 +111,7 @@ func eliminarCerosExtras(Resultado strR : inout String ) {
 ///   - num1: Cantidad númerica en cualquier base contenida en un String
 ///   - num2: Cantidad  númerica en cualquier base contenida en un String
 ///   - esNegativo: Apuntador a la variable "esNegativo", determina si al final de la operación el resultado se debe quedar positivo o negativo.
-func analizarSignos(num1: inout String, num2 : inout String, esNegativo: inout Bool) {
+func resultadoLeySignos(num1: inout String, num2 : inout String, esNegativo: inout Bool) {
     if num1.contains("-") && num2.contains("-") {
         esNegativo = false
         num1 = num1.replacingOccurrences(of: "-", with: "")

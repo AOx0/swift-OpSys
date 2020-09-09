@@ -32,14 +32,13 @@ public func sumaHex(_ num1 : String, más num2 : String ) -> String {
         num2 = num2.replacingOccurrences(of: "-", with: "")
         return restaHex(num1, menos: num2)
     }
-    emparejarNumeros(strNum1: &num1, strNum2: &num2)
+    emparejarLongitud(de: &num1, y: &num2)
     
     let num1List = obtenerListaDigitos(variable: num1)
     let num2List = obtenerListaDigitos(variable: num2)
     
     for i in (0..<num1.count).reversed() {
         var rTemporal = num1List[i] + num2List[i]
-        //var rTemporal = Int(String(num1[String.Index(utf16Offset: i, in: num1)]))! + Int(String(num2[String.Index(utf16Offset: i, in: num2)]))!
         
         rTemporal += llevo
         llevo = rTemporal / 16
@@ -49,7 +48,7 @@ public func sumaHex(_ num1 : String, más num2 : String ) -> String {
     
     resultado = "\(llevo)" + resultado
     
-    eliminarCerosExtras(Resultado: &resultado )
+    eliminarCerosExtras(deCantidad: &resultado )
     if esSumaNegativos { resultado = "-" + resultado }
     return resultado
     
@@ -80,7 +79,7 @@ public func restaHex(_ num1 : String, menos num2 : String ) -> String {
         return sumaHex(num1, más: num2)
     }
     
-    emparejarNumeros(strNum1: &num1, strNum2: &num2)
+    emparejarLongitud(de: &num1, y: &num2)
     
     let num1List = obtenerListaDigitos(variable: num1) //124F [1,2,4,15]
     let num2List = obtenerListaDigitos(variable: num2)
@@ -101,7 +100,7 @@ public func restaHex(_ num1 : String, menos num2 : String ) -> String {
     
     resultado = (resto != 0 ? "-\(restaHex(num2, menos: num1))" : resultado)
     
-    eliminarCerosExtras(Resultado: &resultado )
+    eliminarCerosExtras(deCantidad: &resultado )
     return resultado
 }
 
@@ -151,19 +150,13 @@ public func multiHex(_ num1: String, por num2: String) -> String {
         return resultsList
     }
     
-    var listWithResults : [String] = []
-    
-    analizarSignos(num1: &num1, num2: &num2, esNegativo: &esNegativo)
-    
-    emparejarNumeros(strNum1: &num1, strNum2: &num2)
-    
-    
-    listWithResults = generarResultados(num1: num1, num2: num2)
+    resultadoLeySignos(num1: &num1, num2: &num2, esNegativo: &esNegativo)
+    emparejarLongitud(de: &num1, y: &num2)
     
 
     var zerosToAdd = ""
     var resultsWithZeros : [String] = []
-    for result in listWithResults {
+    for result in generarResultados(num1: num1, num2: num2) {
         resultsWithZeros.append(result + zerosToAdd)
         zerosToAdd += "0"
         
@@ -194,10 +187,10 @@ public func diviHex(_ numerador: String, entre denominador: String) -> Resultado
     var cociente = "0"
     var residuoHex = ""
 
-    analizarSignos(num1: &num1, num2: &num2, esNegativo: &esNegativo)
+    resultadoLeySignos(num1: &num1, num2: &num2, esNegativo: &esNegativo)
 
-    eliminarCerosExtras(Resultado: &num2)
-    eliminarCerosExtras(Resultado: &num1)
+    eliminarCerosExtras(deCantidad: &num2)
+    eliminarCerosExtras(deCantidad: &num1)
     
     if num2 == "0" {
          return Resultado(cociente: "Infinito", residuo: "0")
@@ -214,7 +207,7 @@ public func diviHex(_ numerador: String, entre denominador: String) -> Resultado
             if  Int(num2,radix:16)! <= Int(residuoHex,radix:16)! {
                 let cocienteCalculado = calcularCocienteHex(num2: num2, residuoOriginal: residuoHex)
                 residuoHex = restaHex(residuoHex, menos: multiHex(num2, por: cocienteCalculado))
-                eliminarCerosExtras(Resultado: &residuoHex)
+                eliminarCerosExtras(deCantidad: &residuoHex)
                 cociente += cocienteCalculado
             } else {
                 cociente = cociente + "0"
@@ -222,23 +215,29 @@ public func diviHex(_ numerador: String, entre denominador: String) -> Resultado
             fin += 1
             if fin <= num1.count {
                 residuoHex = residuoHex + String (num1.obtenerCaracterEn(posicion : fin))
-                eliminarCerosExtras(Resultado: &residuoHex)
+                eliminarCerosExtras(deCantidad: &residuoHex)
             }
         }
     }
         
-    eliminarCerosExtras(Resultado: &cociente)
-    eliminarCerosExtras(Resultado: &residuoHex)
+    eliminarCerosExtras(deCantidad: &cociente)
+    eliminarCerosExtras(deCantidad: &residuoHex)
     if esNegativo { cociente = "-" + cociente }
     return Resultado(cociente: cociente, residuo: residuoHex)
 }
 
+/// Función privada clave para la división. Específica para Hexadecimal
+/// Calcula el cociente que tiene una división con un loop que analiza cuántas veces cabe el denominador en el numerador, no devuelve el residuo.
+/// - Parameters:
+///   - num2: Denominador contenido en un String
+///   - residuoOriginal: Numerador contenido en un String
+/// - Returns: El número de veces que cabe el denominador en el numerador
 private func calcularCocienteHex(num2: String, residuoOriginal: String) -> String {
     var residuo = "", num2 = num2, cociente = 0
     repeat {
         cociente += 1
         residuo = restaHex(residuoOriginal, menos: multiHex(num2, por: getHex(digito: cociente)))
-        eliminarCerosExtras(Resultado: &residuo)
+        eliminarCerosExtras(deCantidad: &residuo)
     } while Int(residuo,radix:16)! >= Int(num2,radix:16)!
     
     

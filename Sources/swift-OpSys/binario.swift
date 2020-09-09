@@ -33,7 +33,7 @@ public func sumaBinarios(_ num1 : String, más num2 : String ) -> String {
         num2 = num2.replacingOccurrences(of: "-", with: "")
         return restaBinarios(num1, menos: num2)
     }
-    emparejarNumeros(strNum1: &num1, strNum2: &num2)
+    emparejarLongitud(de: &num1, y: &num2)
     
     for i in (0..<num1.count).reversed() {
         var rTemporal = Int(String(num1[String.Index(utf16Offset: i, in: num1)]))! + Int(String(num2[String.Index(utf16Offset: i, in: num2)]))!
@@ -55,7 +55,7 @@ public func sumaBinarios(_ num1 : String, más num2 : String ) -> String {
     
     resultado = (llevoUno ? "1" : "") + resultado
     
-    eliminarCerosExtras(Resultado: &resultado )
+    eliminarCerosExtras(deCantidad: &resultado )
     if esSumaNegativos { resultado = "-" + resultado }
     return resultado
     
@@ -86,7 +86,7 @@ public func restaBinarios(_ num1 : String, menos num2 : String ) -> String {
         return sumaBinarios(num1, más: num2)
     }
     
-    emparejarNumeros(strNum1: &num1, strNum2: &num2)
+    emparejarLongitud(de: &num1, y: &num2)
     
     for i in (0..<num1.count).reversed() {
         var rTemporal = Int(String(num1[String.Index(utf16Offset: i, in: num1)]))! - Int(String(num2[String.Index(utf16Offset: i, in: num2)]))!
@@ -108,7 +108,7 @@ public func restaBinarios(_ num1 : String, menos num2 : String ) -> String {
     
     resultado = (restoUno ? "-\(restaBinarios(num2, menos: num1))" : resultado)
     
-    eliminarCerosExtras(Resultado: &resultado )
+    eliminarCerosExtras(deCantidad: &resultado )
     return resultado
 }
 
@@ -157,17 +157,12 @@ public func multiBinarios(_ num1: String, por num2: String) -> String {
         return resultsList
     }
     
-    var listWithResults : [String] = []
-    
-    analizarSignos(num1: &num1, num2: &num2, esNegativo: &esNegativo)
-    
-    emparejarNumeros(strNum1: &num1, strNum2: &num2)
-    listWithResults = generarResultados(num1: num1, num2: num2)
-    
+    resultadoLeySignos(num1: &num1, num2: &num2, esNegativo: &esNegativo)
+    emparejarLongitud(de: &num1, y: &num2)
 
     var zerosToAdd = ""
     var resultsWithZeros : [String] = []
-    for result in listWithResults {
+    for result in generarResultados(num1: num1, num2: num2) {
         resultsWithZeros.append(result + zerosToAdd)
         zerosToAdd += "0"
         
@@ -198,10 +193,10 @@ public func diviBinarios(_ numerador: String, entre denominador: String) -> Resu
     var cociente = "0"
     var residuo = ""
 
-    analizarSignos(num1: &num1, num2: &num2, esNegativo: &esNegativo)
+    resultadoLeySignos(num1: &num1, num2: &num2, esNegativo: &esNegativo)
 
-    eliminarCerosExtras(Resultado: &num2)
-    eliminarCerosExtras(Resultado: &num1)
+    eliminarCerosExtras(deCantidad: &num2)
+    eliminarCerosExtras(deCantidad: &num1)
     
     if num2 == "0" {
          return Resultado(cociente: "Infinito", residuo: "0")
@@ -218,20 +213,20 @@ public func diviBinarios(_ numerador: String, entre denominador: String) -> Resu
             if num2.count <= residuo.count && Int(num2,radix:2)! <= Int(residuo,radix:2)! {
                 cociente = cociente + "1"
                 residuo = restaBinarios(residuo, menos: multiBinarios(num2, por: "1"))
-                eliminarCerosExtras(Resultado: &residuo)
+                eliminarCerosExtras(deCantidad: &residuo)
             } else {
                 cociente = cociente + "0"
             }
             fin += 1
             if fin <= num1.count {
                 residuo = residuo + String (num1.obtenerCaracterEn(posicion : fin))
-                eliminarCerosExtras(Resultado: &residuo)
+                eliminarCerosExtras(deCantidad: &residuo)
             }
         }
     }
     
-    eliminarCerosExtras(Resultado: &cociente)
-    eliminarCerosExtras(Resultado: &residuo)
+    eliminarCerosExtras(deCantidad: &cociente)
+    eliminarCerosExtras(deCantidad: &residuo)
     if esNegativo { cociente = "-" + cociente }
     return Resultado(cociente: cociente, residuo: residuo)
 }

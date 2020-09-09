@@ -32,7 +32,7 @@ public func sumaOctal(_ num1 : String, más num2 : String ) -> String {
         num2 = num2.replacingOccurrences(of: "-", with: "")
         return restaOctal(num1, menos: num2)
     }
-    emparejarNumeros(strNum1: &num1, strNum2: &num2)
+    emparejarLongitud(de: &num1, y: &num2)
     
     for i in (0..<num1.count).reversed() {
         var rTemporal = Int(String(num1[String.Index(utf16Offset: i, in: num1)]))! + Int(String(num2[String.Index(utf16Offset: i, in: num2)]))!
@@ -45,7 +45,7 @@ public func sumaOctal(_ num1 : String, más num2 : String ) -> String {
     
     resultado = "\(llevo)" + resultado
     
-    eliminarCerosExtras(Resultado: &resultado )
+    eliminarCerosExtras(deCantidad: &resultado )
     if esSumaNegativos { resultado = "-" + resultado }
     return resultado
     
@@ -76,7 +76,7 @@ public func restaOctal(_ num1 : String, menos num2 : String ) -> String {
         return sumaOctal(num1, más: num2)
     }
     
-    emparejarNumeros(strNum1: &num1, strNum2: &num2)
+    emparejarLongitud(de: &num1, y: &num2)
     
     for i in (0..<num1.count).reversed() {
         var rTemporal = Int(String(num1[String.Index(utf16Offset: i, in: num1)]))! - Int(String(num2[String.Index(utf16Offset: i, in: num2)]))!
@@ -94,7 +94,7 @@ public func restaOctal(_ num1 : String, menos num2 : String ) -> String {
     
     resultado = (resto != 0 ? "-\(restaOctal(num2, menos: num1))" : resultado)
     
-    eliminarCerosExtras(Resultado: &resultado )
+    eliminarCerosExtras(deCantidad: &resultado )
     return resultado
 }
 
@@ -143,17 +143,12 @@ public func multiOctal(_ num1: String, por num2: String) -> String {
         return resultsList
     }
     
-    var listWithResults : [String] = []
-    
-    analizarSignos(num1: &num1, num2: &num2, esNegativo: &esNegativo)
-    
-    emparejarNumeros(strNum1: &num1, strNum2: &num2)
-    listWithResults = generarResultados(num1: num1, num2: num2)
-    
+    resultadoLeySignos(num1: &num1, num2: &num2, esNegativo: &esNegativo)
+    emparejarLongitud(de: &num1, y: &num2)
 
     var zerosToAdd = ""
     var resultsWithZeros : [String] = []
-    for result in listWithResults {
+    for result in generarResultados(num1: num1, num2: num2) {
         resultsWithZeros.append(result + zerosToAdd)
         zerosToAdd += "0"
         
@@ -184,10 +179,10 @@ public func diviOctal(_ numerador: String, entre denominador: String) -> Resulta
     var cociente = "0"
     var residuo = ""
    
-    analizarSignos(num1: &num1, num2: &num2, esNegativo: &esNegativo)
+    resultadoLeySignos(num1: &num1, num2: &num2, esNegativo: &esNegativo)
 
-    eliminarCerosExtras(Resultado: &num2)
-    eliminarCerosExtras(Resultado: &num1)
+    eliminarCerosExtras(deCantidad: &num2)
+    eliminarCerosExtras(deCantidad: &num1)
     
     if num2 == "0" {
          return Resultado(cociente: "Infinito", residuo: "0")
@@ -203,10 +198,8 @@ public func diviOctal(_ numerador: String, entre denominador: String) -> Resulta
         while fin <= num1.count {
             if  Int(num2,radix:8)! <= Int(residuo,radix:8)! {
                 let cocienteCalculado = calcularCociente(num2: num2, residuoOriginal: residuo)
-//                print("Residuo ", residuo, "(\(residuo)-\(multiOctal(num2, por: cocienteCalculado)))")
                 residuo = restaOctal(residuo, menos: multiOctal(num2, por: cocienteCalculado))
-                eliminarCerosExtras(Resultado: &residuo)
-//                print("Residuo despúes de resta: ", residuo, "(\(residuo)-\(multiOctal(num2, por: cocienteCalculado)))")
+                eliminarCerosExtras(deCantidad: &residuo)
                 cociente += cocienteCalculado
             } else {
                 cociente = cociente + "0"
@@ -214,24 +207,30 @@ public func diviOctal(_ numerador: String, entre denominador: String) -> Resulta
             fin += 1
             if fin <= num1.count {
                 residuo = residuo + String (num1.obtenerCaracterEn(posicion : fin))
-                eliminarCerosExtras(Resultado: &residuo)
+                eliminarCerosExtras(deCantidad: &residuo)
             }
         }
     }
         
-    eliminarCerosExtras(Resultado: &cociente)
-    eliminarCerosExtras(Resultado: &residuo)
+    eliminarCerosExtras(deCantidad: &cociente)
+    eliminarCerosExtras(deCantidad: &residuo)
     if esNegativo { cociente = "-" + cociente }
     return Resultado(cociente: cociente, residuo: residuo)
 }
 
 
+/// Función privada clave para la división.
+/// Calcula el cociente que tiene una división con un loop que analiza cuántas veces cabe el denominador en el numerador, no devuelve el residuo.
+/// - Parameters:
+///   - num2: Denominador contenido en un String
+///   - residuoOriginal: Numerador contenido en un String
+/// - Returns: El número de veces que cabe el denominador en el numerador
 func calcularCociente(num2: String, residuoOriginal: String) -> String {
     var residuo = "", num2 = num2, cociente = 0
     repeat {
         cociente += 1
         residuo = restaOctal(residuoOriginal, menos: multiOctal(num2, por: String(cociente)))
-        eliminarCerosExtras(Resultado: &residuo)
+        eliminarCerosExtras(deCantidad: &residuo)
     } while Int(residuo,radix:8)! >= Int(num2,radix:8)!
     
     return "\(cociente)"
