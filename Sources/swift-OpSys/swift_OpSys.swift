@@ -124,3 +124,15 @@ func resultadoLeySignos(num1: inout String, num2 : inout String, esNegativo: ino
         num2 = num2.replacingOccurrences(of: "-", with: "")
     }
 }
+
+enum Errors : Error {
+    case wrongDataType
+}
+
+func checkValidDataType<T>(_ variable : T) -> Bool {
+    guard T.Type.self == String.Type.self || T.Type.self == Int.Type.self else {
+        return false
+    }
+    return true
+    
+}

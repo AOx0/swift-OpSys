@@ -19,8 +19,10 @@ import Foundation
 ///   - num1: String que contiene un número binario que actúa como sumando
 ///   - num2: String que contiene un número binario que actúa como sumando
 /// - Returns: String con el resultado de la suma total de la operación num1 + num2
-public func sumaBinarios(_ num1 : String, más num2 : String ) -> String {
-    var num1 = num1,  num2 = num2, resultado = "", llevoUno = false, esSumaNegativos = false
+public func sumaBinarios<Binary>(_ num1 : Binary, más num2 : Binary )  -> String {
+    guard checkValidDataType(num1) && checkValidDataType(num2) else { return "0" }
+    
+    var num1 = String(describing: num1),  num2 = String(describing: num2), resultado = "", llevoUno = false, esSumaNegativos = false
     
     if num1.contains("-") && num2.contains("-") {
         esSumaNegativos = true
@@ -71,8 +73,10 @@ public func sumaBinarios(_ num1 : String, más num2 : String ) -> String {
 ///   - num1: String que contiene un número binario que actúa como minuendo
 ///   - num2: String que contiene un número binario que actúa como sustraendo
 /// - Returns: String que contiene un número binario representando la diferencia de la operación num1 - num2
-public func restaBinarios(_ num1 : String, menos num2 : String ) -> String {
-    var num1 = num1,  num2 = num2, resultado = "", restoUno = false
+public func restaBinarios<Binary>(_ num1 : Binary, menos num2 : Binary ) -> String {
+    guard checkValidDataType(num1) && checkValidDataType(num2) else { return "0" }
+    
+    var num1 = String(describing: num1),  num2 = String(describing: num2), resultado = "", restoUno = false
     
     if num1.contains("-") && num2.contains("-") {
         num1 = num1.replacingOccurrences(of: "-", with: "")
@@ -122,8 +126,10 @@ public func restaBinarios(_ num1 : String, menos num2 : String ) -> String {
 ///   - num1: String con un numero binario que actúa como factor
 ///   - num2: String con un numero binario que actúa como factor
 /// - Returns: String con el producto de la multiplicación num1 * num2 en binario
-public func multiBinarios(_ num1: String, por num2: String) -> String {
-    var num1 = num1, num2 = num2, esNegativo = false
+public func multiBinarios<Binary>(_ num1: Binary, por num2: Binary) -> String {
+    guard checkValidDataType(num1) && checkValidDataType(num2) else { return "0" }
+    
+    var num1 = String(describing: num1), num2 = String(describing: num2), esNegativo = false
     
     func generarResultados(num1: String, num2 : String) -> [String] {
         
@@ -188,8 +194,10 @@ public func multiBinarios(_ num1: String, por num2: String) -> String {
 ///   - numerador: String con un numero binario que actúa como numerador
 ///   - denominador: String con un numero binario que actúa como denominador
 /// - Returns: Una instancia de la estructura Resultado que contiene en cociente y residuo en sus propiedades, resultado de numerador / denominador
-public func diviBinarios(_ numerador: String, entre denominador: String) -> Resultado {
-    var num1 = numerador, num2 = denominador, esNegativo = false
+public func diviBinarios<Binary>(_ numerador: Binary, entre denominador: Binary) -> Resultado {
+    guard checkValidDataType(numerador) && checkValidDataType(denominador) else { return Resultado(cociente: "0", residuo: "0") }
+    
+    var num1 = String(describing: numerador), num2 = String(describing: denominador), esNegativo = false
     var cociente = "0"
     var residuo = ""
 

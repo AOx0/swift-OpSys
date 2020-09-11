@@ -18,8 +18,10 @@ import Foundation
 ///   - num1: String que contiene un número octal que actúa como sumando
 ///   - num2: String que contiene un número octal que actúa como sumando
 /// - Returns: String con el resultado de la suma total de la operación num1 + num2
-public func sumaOctal(_ num1 : String, más num2 : String ) -> String {
-    var num1 = num1,  num2 = num2, resultado = "", llevo = 0, esSumaNegativos = false
+public func sumaOctal<Octal>(_ num1 : Octal, más num2 : Octal ) -> String {
+    guard checkValidDataType(num1) && checkValidDataType(num2) else { return "0" }
+    
+    var num1 = String(describing: num1),  num2 = String(describing: num2), resultado = "", llevo = 0, esSumaNegativos = false
     
     if num1.contains("-") && num2.contains("-") {
         esSumaNegativos = true
@@ -61,8 +63,10 @@ public func sumaOctal(_ num1 : String, más num2 : String ) -> String {
 ///   - num1: String que contiene un número octal que actúa como minuendo
 ///   - num2: String que contiene un número octal que actúa como sustraendo
 /// - Returns: String que contiene un número octal representando la diferencia de la operación num1 - num2
-public func restaOctal(_ num1 : String, menos num2 : String ) -> String {
-    var num1 = num1,  num2 = num2, resultado = "", resto = 0
+public func restaOctal<Octal>(_ num1 : Octal, menos num2 : Octal ) -> String {
+    guard checkValidDataType(num1) && checkValidDataType(num2) else { return "0" }
+    
+    var num1 = String(describing: num1),  num2 = String(describing: num2), resultado = "", resto = 0
     
     if num1.contains("-") && num2.contains("-") {
         num1 = num1.replacingOccurrences(of: "-", with: "")
@@ -108,8 +112,10 @@ public func restaOctal(_ num1 : String, menos num2 : String ) -> String {
 ///   - num1: String con un numero octal que actúa como factor
 ///   - num2: String con un numero octal que actúa como factor
 /// - Returns: String con el producto de la multiplicación num1 * num2 en octal
-public func multiOctal(_ num1: String, por num2: String) -> String {
-    var num1 = num1, num2 = num2, esNegativo = false
+public func multiOctal<Octal>(_ num1: Octal, por num2: Octal) -> String {
+    guard checkValidDataType(num1) && checkValidDataType(num2) else { return "0" }
+    
+    var num1 = String(describing: num1), num2 = String(describing: num2), esNegativo = false
     
     func generarResultados(num1: String, num2 : String) -> [String] {
         
@@ -174,8 +180,10 @@ public func multiOctal(_ num1: String, por num2: String) -> String {
 ///   - numerador: String con un numero octal que actúa como numerador
 ///   - denominador: String con un numero octal que actúa como denominador
 /// - Returns: Una instancia de la estructura Resultado que contiene en cociente y residuo en sus propiedades, resultado de numerador / denominador
-public func diviOctal(_ numerador: String, entre denominador: String) -> Resultado {
-    var num1 = numerador, num2 = denominador, esNegativo = false
+public func diviOctal<Octal>(_ numerador: Octal, entre denominador: Octal) -> Resultado {
+    guard checkValidDataType(numerador) && checkValidDataType(denominador) else { return Resultado(cociente: "0", residuo: "0") }
+    
+    var num1 = String(describing: numerador), num2 = String(describing: denominador), esNegativo = false
     var cociente = "0"
     var residuo = ""
    
