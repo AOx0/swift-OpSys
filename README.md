@@ -31,21 +31,21 @@ El programa es capaz de realizar sumas, restas, multiplicaciones y divisiones co
 Cada función acepta como parámetros datos de tipo `Int`  y `String` . Excepto las del sistema hexadecimal que solo acepta `String` como parámetro. Todas funciones devuelven un String con el resultado, en caso de haber un error devuelve `"0"`.
 
 ```swift
-sumaOctal("777", más: "1") 	// Devuelve "1000"
-sumaOctal(777, más: 1)			// Devuelve "1000"
+sumaOctal("777", más: "1")  // Devuelve "1000"
+sumaOctal(777, más: 1)      // Devuelve "1000"
 
-sumaOctal(77.7, más: 1)			// Error, devuelve "0"
+sumaOctal(77.7, más: 1)     // Error, devuelve "0"
 ```
 
 ```swift
-sumaBinarios("10101", más: "1011")	// Devuelve "100000"
-sumaBinarios(10101, más: 1011)	// Devuelve "100000"
+sumaBinarios("10101", más: "1011") // Devuelve "100000"
+sumaBinarios(10101, más: 1011)     // Devuelve "100000"
 
-sumaBinarios(10,101, más: 1011)		 // Error, devuelve "0"
+sumaBinarios(101.01, más: 1011)    // Error, devuelve "0"
 ```
 
 ```swift
-sumaHex("A51F9", más: "FFF")	// Devuelve "A61F8"
-sumaHex(12331, más: 832)			// Error del compilador, sumaHex recibe como parámetros datos de tipo String
+sumaHex("A51F9", más: "FFF") // Devuelve "A61F8"
+sumaHex(12331, más: 832)     // Error del compilador, sumaHex recibe como parámetros datos de tipo String
 ```
 
